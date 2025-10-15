@@ -1,0 +1,43 @@
+module RippleCarryAdder(
+input  [3:0] i_A,
+input  [3:0] i_B,
+input 		 i_C,
+output 		 o_C,
+output [3:0] o_S
+);
+
+	wire [2:0] w_C;
+
+	FullAdder adder0 (
+	.i_a(i_A[0]),
+	.i_b(i_B[0]),
+	.i_cin(i_C),
+	.o_sum(o_S[0]),
+	.o_cout(w_C[0])
+	);
+	
+	FullAdder adder1 (
+	.i_a(i_A[1]),
+	.i_b(i_B[1]),
+	.i_cin(w_C[0]),
+	.o_sum(o_S[1]),
+	.o_cout(w_C[1])
+	);
+	
+	FullAdder adder2(
+	.i_a(i_A[2]),
+	.i_b(i_B[2]),
+	.i_cin(w_C[1]),
+	.o_sum(w_S[2]),
+	.o_cout(w_C[2])
+	);
+	
+	FullAdder adder3(
+	.i_a(i_A[3]),
+	.i_b(i_B[3]),
+	.i_cin(w_C[2]),
+	.o_sum(w_S[3]),
+	.o_cout(o_C)
+	);
+
+endmodule
